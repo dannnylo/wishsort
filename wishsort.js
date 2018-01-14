@@ -20,6 +20,9 @@ var WishSort = {
     $.each(sorted, function(){
       $(this).appendTo($('#feed-grid'));
     })
+
+    window.scrollTo(0,0);
+
   },
 
   getPages: function(limit){
@@ -28,13 +31,13 @@ var WishSort = {
     if (limit > WishSort.ajaxPages){
       setTimeout(function(){
         if (WishSort.allProductsListed()){
-          WishSort.sortProducts();
+          setTimeout(WishSort.sortProducts, 1000);
         } else{
           WishSort.getPages(limit);
         }
       }, 1000);
     } else {
-      WishSort.sortProducts();
+      setTimeout(WishSort.sortProducts, 1000);
     }
     return true;
   },
