@@ -46,7 +46,8 @@ var WishSort = {
     } else {
       this.getPages(limit);
     }
-  },
+  }
 }
 
-// WishSort.sort(20);
+// Limit wait 20 pages
+WishSort.sort(20);
