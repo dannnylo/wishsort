@@ -23,6 +23,8 @@ var WishSort = {
   },
 
   getPages: function(limit){
+    WishSort.ajaxPages += 1;
+    window.scrollTo(0,99999);
     if (limit > WishSort.ajaxPages){
       setTimeout(function(){
         if (WishSort.allProductsListed()){
@@ -34,8 +36,6 @@ var WishSort = {
     } else {
       WishSort.sortProducts();
     }
-    WishSort.ajaxPages += 1;
-    window.scrollTo(0,99999);
     return true;
   },
 
@@ -48,6 +48,3 @@ var WishSort = {
     }
   }
 }
-
-// Limit wait 20 pages
-WishSort.sort(20);
