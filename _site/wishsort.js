@@ -17,10 +17,8 @@ var WishSort = {
       return ((priceA < priceB) ? -1 : ((priceA > priceB) ? 1 : 0));
     });
 
-    var grid = $($('#feed-grid, #feed-grid-modal').first())
-
     $.each(sorted, function(){
-      $(this).appendTo(grid);
+      $(this).appendTo($('#feed-grid'));
     })
 
     window.scrollTo(0,0);
