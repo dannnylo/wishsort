@@ -1,3 +1,7 @@
+var my_awesome_script = document.createElement('script');
+my_awesome_script.setAttribute('src','https://code.jquery.com/jquery-1.12.4.min.js');
+document.head.appendChild(my_awesome_script);
+
 var WishSort = {
   ajaxPages: 0,
   priceToInteger: function(text){
