@@ -7,21 +7,25 @@ var WishSort = {
   },
 
   allProductsListed: function(){
-    return $('#feed-more-end').is(':visible');
+    return document.getElementById('feed-more-end') !== null;
   },
 
   sortProducts: function (){
-    var sorted = $('.feed-product-item').sort(function(prodA, prodB){
-      var priceA = WishSort.priceToInteger($(prodA).find('.feed-actual-price').text());
-      var priceB = WishSort.priceToInteger($(prodB).find('.feed-actual-price').text());
+    var items = document.getElementsByClassName('feed-product-item')
+    var sorted = Array.prototype.slice.call(items).sort(function(prodA, prodB){
+      var priceA = WishSort.priceToInteger(prodA.getElementsByClassName('feed-actual-price')[0].innerText);
+      var priceB = WishSort.priceToInteger(prodB.getElementsByClassName('feed-actual-price')[0].innerText);
       return ((priceA < priceB) ? -1 : ((priceA > priceB) ? 1 : 0));
     });
 
-    var grid = $($('#feed-grid, #feed-grid-modal').first())
+    var grid = document.getElementById("feed-grid")
+    if (grid === null){
+      grid = document.getElementById("feed-grid-modal")
+    }
 
-    $.each(sorted, function(){
-      $(this).appendTo(grid);
-    })
+    for (var item in sorted) {
+      grid.append(sorted[item])
+    }
 
     window.scrollTo(0,0);
 
