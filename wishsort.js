@@ -7,7 +7,12 @@ var WishSort = {
   },
 
   allProductsListed: function(){
-    return document.getElementById('feed-more-end') !== null;
+    var noMoreItens = document.getElementById('feed-more-not-found')
+    if (noMoreItens === null){
+      return true
+    } else {
+      return (noMoreItens.className === 'hide');        
+    }
   },
 
   sortProducts: function (){
