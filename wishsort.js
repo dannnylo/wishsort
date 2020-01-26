@@ -7,33 +7,34 @@ var WishSort = {
   },
 
   allProductsListed: function(){
-    var noMoreItens = document.getElementById('feed-more-not-found')
-    if (noMoreItens === null){
-      return true
-    } else {
-      return (noMoreItens.className === 'hide');        
-    }
+    var noMoreItens = document.querySelectorAll("[class*=ProductGrid__NoItems]")
+    return noMoreItens.length > 0
   },
 
   sortProducts: function (){
-    var items = document.getElementsByClassName('feed-product-item')
+    var items = document.querySelectorAll("[class*=ProductGrid__FeedTileWidthWrapper]")
     var sorted = Array.prototype.slice.call(items).sort(function(prodA, prodB){
-      var priceA = WishSort.priceToInteger(prodA.getElementsByClassName('feed-actual-price')[0].innerText);
-      var priceB = WishSort.priceToInteger(prodB.getElementsByClassName('feed-actual-price')[0].innerText);
+      var priceA = WishSort.priceToInteger(prodA.querySelectorAll("[class*=FeedTile__ActualPrice]")[0].innerText);
+      var priceB = WishSort.priceToInteger(prodB.querySelectorAll("[class*=FeedTile__ActualPrice]")[0].innerText);
       return ((priceA < priceB) ? -1 : ((priceA > priceB) ? 1 : 0));
     });
 
-    var grid = document.getElementById("feed-grid")
-    if (grid === null){
-      grid = document.getElementById("feed-grid-modal")
-    }
+    var itemsByRow = 4
 
     for (var item in sorted) {
-      grid.append(sorted[item])
+      var itemIndex = parseInt(item, 10)
+      if (!isNaN(itemIndex)){
+        var row = parseInt(itemIndex / itemsByRow)
+        grid = WishSort.findRow(row)
+        grid.append(sorted[item])
+      }
     }
 
     window.scrollTo(0,0);
 
+  },
+  findRow(i) {
+    return document.querySelectorAll("[class*=ProductGrid__ProductGridRow]")[i]
   },
 
   getPages: function(limit){
@@ -62,3 +63,4 @@ var WishSort = {
     }
   }
 }
+WishSort.sortProducts()
